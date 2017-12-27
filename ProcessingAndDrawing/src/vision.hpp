@@ -49,16 +49,16 @@ struct VisionResultsPackage {
 
 typedef std::vector<cv::Point> contour_type;
 
-const int RES_X = 320, RES_Y = 240;
-const int MIN_HUE = 55, MAX_HUE = 65;
-const int MIN_SAT = 0, MAX_SAT = 255;
-const int MIN_VAL = 50, MAX_VAL = 255;
+const int RES_X = 640, RES_Y = 480;
+const int MIN_HUE = 53, MAX_HUE = 85;
+const int MIN_SAT = 85, MAX_SAT = 255;
+const int MIN_VAL = 135, MAX_VAL = 255;
 
 const double
 MIN_AREA = 0.001, MAX_AREA = 1000000,
 MIN_WIDTH = 0, MAX_WIDTH = 100000, //rectangle width
 MIN_HEIGHT = 0, MAX_HEIGHT = 100000, //rectangle height
-MIN_RECT_RAT = 1.5, MAX_RECT_RAT = 8, //rect height / rect width
+MIN_RECT_RAT = 0.1, MAX_RECT_RAT = 10, //rect height / rect width
 MIN_AREA_RAT = 0.85, MAX_AREA_RAT = 100; //cvxhull area / contour area
 
 /**

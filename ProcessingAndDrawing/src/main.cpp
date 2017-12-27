@@ -5,7 +5,7 @@
 using namespace std;
 
 shared_ptr<NetworkTable> myNetworkTable; //our networktable for reading/writing
-string netTableAddress = "192.168.1.34"; //address of the rio
+string netTableAddress = "192.168.0.108"; //address of the rio (networktables server)
 
 //useful for testing OpenCV drawing to see you can modify an image
 void fillCircle (cv::Mat img, int rad, cv::Point center);
@@ -13,10 +13,10 @@ void pushToNetworkTables (VisionResultsPackage info);
 
 //camera parameters
 int 
-device = 0, //bc we are using video0 in this case
-width = 320, 
-height = 240, 
-framerate = 15, 
+device = 1, //bc we are using video1 in this case
+width = 640, 
+height = 480, 
+framerate = 60, 
 mjpeg = false; //mjpeg is not better than just grabbing a raw image in this case
 
 //network parameters
@@ -24,11 +24,11 @@ int
 bitrate = 600000, //kbit/sec over network
 port_stream = 5806, //destination port for raw image
 port_thresh = 5805; //destination port for thresholded image
-string ip = "192.168.1.34"; //destination ip
+string ip = "192.168.0.108"; //destination ip (driverstation)
 
 string tableName = "CVResultsTable";
 
-bool verbose = true;
+bool verbose = false;
 
 void flash_good_settings() {
     char setting_script[100];
@@ -91,11 +91,11 @@ int main () {
     for (long long frame = 0; ; frame++) {
         //have to alternate from bad settings to good settings on some cameras
         //because of weird firmware issues, sometimes the flash doesn't stick 
-        //otherwise
+        //otherwise. This doesn't seem to be necessary with the PS Eye, so it's disabled
         if (frame < 10) {
-            flash_bad_settings();
-        }
-        else if (frame == 50) {
+           // flash_bad_settings();
+        } 
+        else if (frame < 10) { //set to frame == 50 if doing the bad_settings() flash
             flash_good_settings();
         }
 
@@ -105,9 +105,10 @@ int main () {
 
         if (success) {
             IplImage *img = mycam.retrieveFrame(0); //store frame in IplImage
+            if(img) {     
             cameraFrame = cv::cvarrToMat (img); //convert IplImage to cv::Mat
             processedImage = cameraFrame;
-                
+            
             //process the image, put the information into network tables
             VisionResultsPackage info = calculate(cameraFrame, processedImage);
 
@@ -120,10 +121,11 @@ int main () {
                 printf ("Out image stats: (depth %d), (nchannels %d)\n", 
                     outImage.depth, outImage.nChannels);
             }
-            mywriter.writeFrame (&outImage); //write output image over network
+            mywriter.writeFrame (&outImage); //write output image over network       
+            }
         }
 
-        //delay for 10 millisecondss
+        //delay for 10 milliseconds (microseconds?)
         usleep (10);
     }
 

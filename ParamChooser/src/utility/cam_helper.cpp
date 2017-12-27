@@ -14,7 +14,6 @@ void flash_settings (int device, const CameraSettings &settings) {
             "--set-ctrl white_balance_temperature=%d "
             "--set-ctrl power_line_frequency=%d "
             "--set-ctrl sharpness=%d "
-            "--set-ctrl backlight_compensation=%d "
             "--set-ctrl exposure_auto=%d "
             "--set-ctrl exposure_absolute=%d ",
         device, 
@@ -25,7 +24,6 @@ void flash_settings (int device, const CameraSettings &settings) {
         settings.white_balance_temperature,
         settings.power_line_frequency,
         settings.sharpness,
-        settings.backlight_compensation,
         settings.exposure_auto,
         settings.exposure_absolute);
 

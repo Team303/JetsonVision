@@ -6,14 +6,14 @@
 using namespace std;
 
 shared_ptr<NetworkTable> myNetworkTable; //our networktable for reading/writing
-string netTableAddress = "192.168.1.34"; //address of the rio
+string netTableAddress = "192.168.0.108"; //address of the rio
 
 //camera parameters
 int 
-device = 0, //bc we are using video0 in this case
-width = 320, 
-height = 240, 
-framerate = 15, 
+device = 1, //bc we are using video0 in this case
+width = 640, 
+height = 480, 
+framerate = 30, 
 mjpeg = false; //mjpeg is not better than just grabbing a raw image in this case
 
 //network parameters: change this according to your specific network configuration
@@ -21,9 +21,9 @@ int
 bitrate = 600000, //kbit/sec over network
 port_stream = 5806, //destination port for raw image
 port_thresh = 5805; //destination port for thresholded image
-string ip = "192.168.1.34"; //destination ip
+string ip = "192.168.0.108"; //destination ip (driverstation)
 
-string tableName = "CVResultsTable";
+string tableName = "CVResultsTable_paramchooser";
 bool verbose = true;
 
 namespace params {

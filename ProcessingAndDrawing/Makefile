@@ -1,9 +1,9 @@
 GST_INC    := -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/lib/aarch64-linux-gnu/gstreamer-1.0/include
 LOCAL_INC  := -Isrc/opencv-code/ -Isrc/utility/
-NTCORE_INC := -I/3419/ntcore/include/ -I/3419/ntcore/wpiutil/include/
+NTCORE_INC := -I/303/ntcore/include/ -I/303/ntcore/wpiutil/include/
 INC        := ${NTCORE_INC} ${LOCAL_INC} ${GST_INC}
 
-LIBS       := -L/3419/ntcore/ `pkg-config --cflags --libs opencv gstreamer-1.0` -lgstapp-1.0 -lgstriff-1.0 -lgstbase-1.0 -lgstvideo-1.0 -lgstpbutils-1.0 -lntcore -lwpiutil -lpthread
+LIBS       := -L/303/ntcore/ `pkg-config --cflags --libs opencv gstreamer-1.0` -lgstapp-1.0 -lgstriff-1.0 -lgstbase-1.0 -lgstvideo-1.0 -lgstpbutils-1.0 -lntcore -lwpiutil -lpthread
 
 SOURCES    := $(shell find src -type f -name *.cpp)
 OBJECTS    := $(patsubst src/%,obj/%,$(SOURCES:.cpp=.o))

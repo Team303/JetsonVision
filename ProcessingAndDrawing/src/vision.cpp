@@ -62,6 +62,7 @@ bool is_valid (contour_type &contour) {
     if (width < MIN_WIDTH || width > MAX_WIDTH) valid = false;
     if (height < MIN_HEIGHT || height > MAX_HEIGHT) valid = false;
 
+    //valid = true; //for the sake of testing assume all contours are valid.
     return valid;
 }
 
@@ -90,7 +91,7 @@ VisionResultsPackage calculate(const cv::Mat &bgr, cv::Mat &processedImage){
     cv::cvtColor(processedImage, processedImage, CV_GRAY2BGR); 
     //processedImage = bgr.clone();  
 
-    drawPoint (processedImage, TEST_POINT, GUIDE_DOT);
+    //drawPoint (processedImage, TEST_POINT, GUIDE_DOT);
 
     //contour detection
     vector<contour_type> contours;

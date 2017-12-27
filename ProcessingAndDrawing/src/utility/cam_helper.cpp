@@ -7,27 +7,15 @@ void flash_settings (int device, const CameraSettings &settings) {
     //to data in CameraSettings struct
     sprintf (setting_script, 
         "v4l2-ctl -d /dev/video%d  "
-            "--set-ctrl brightness=%d "
-            "--set-ctrl contrast=%d "
-            "--set-ctrl saturation=%d "
-            "--set-ctrl white_balance_temperature_auto=%d "
-            "--set-ctrl white_balance_temperature=%d "
-            "--set-ctrl power_line_frequency=%d "
-            "--set-ctrl sharpness=%d "
-            "--set-ctrl backlight_compensation=%d "
-            "--set-ctrl exposure_auto=%d "
-            "--set-ctrl exposure_absolute=%d ",
+            "--set-ctrl white_balance_automatic=%d "
+            "--set-ctrl auto_exposure=%d "
+            "--set-ctrl exposure=%d "
+            "--set-ctrl gain_automatic=%d ",
         device, 
-        settings.brightness,
-        settings.contrast,
-        settings.saturation,
-        settings.white_balance_temperature_auto,
-        settings.white_balance_temperature,
-        settings.power_line_frequency,
-        settings.sharpness,
-        settings.backlight_compensation,
-        settings.exposure_auto,
-        settings.exposure_absolute);
+        settings.white_balance_automatic,
+        settings.auto_exposure,
+        settings.exposure,
+        settings.gain_automatic);
 
     //run the system call created in the above step
     system (setting_script);

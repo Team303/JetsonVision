@@ -18,52 +18,20 @@ using namespace std;
  * ranges are, you may need to modify this struct to match your camera.
  */
 struct CameraSettings {
-    //brightness: should be relatively high so the reflective tape is bright
-    int brightness = 100; 
 
-    //contrast: should be relatively high for higher contrast between light and 
-    //dark parts of the image
-    int contrast = 10; 
+    int white_balance_automatic=0;
+    int auto_exposure=1;
+    int exposure=30;
+    int gain_automatic=0;
 
-    //saturation: should be relatively high so the colored reflective tape has 
-    //a full and consistent color
-    int saturation = 100;
-
-    //white balance temperature auto: menu setting, should be off
-    int white_balance_temperature_auto = 0;
-
-    //white balance temperature: not super important, but can be quite high
-    int white_balance_temperature = 9000;
-
-    //power line frequency: menu, on our camera 0=disabled, 1=50hz, 2=60hz
-    int power_line_frequency = 2;
-
-    //sharpness: does not matter much
-    int sharpness = 25;
-
-    //backlight compensation: off
-    int backlight_compensation = 0;
-    
-    //exposure auto: menu item, should be set to off
-    int exposure_auto = 1;
-
-    //exposure absolute, should be as low as possible for minimal motion blur
-    //and most consistent colors
-    int exposure_absolute = 5;
 };
 
 inline bool operator== (const CameraSettings &s1,const CameraSettings &s2) {
     return
-        s1.brightness == s2.brightness &&
-        s1.contrast == s2.contrast &&
-        s1.saturation == s2.saturation &&
-        s1.white_balance_temperature_auto == s2.white_balance_temperature_auto &&
-        s1.white_balance_temperature == s2.white_balance_temperature &&
-        s1.power_line_frequency == s2.power_line_frequency &&
-        s1.sharpness == s2.sharpness &&
-        s1.backlight_compensation == s2.backlight_compensation &&
-        s1.exposure_auto == s2.exposure_auto &&
-        s1.exposure_absolute == s2.exposure_absolute;
+	s1.white_balance_automatic == s2.white_balance_automatic &&
+	s1.auto_exposure == s2.auto_exposure &&
+	s1.exposure == s2.exposure &&
+	s1.gain_automatic == s2.gain_automatic;
 }
 
 inline bool operator!= (const CameraSettings &s1,const CameraSettings &s2) {
