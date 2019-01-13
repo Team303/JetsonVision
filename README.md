@@ -16,9 +16,7 @@ is taken from the FRC guide on [elinux.org](https://elinux.org/Jetson/FRC_Setup)
 Generally, these are the steps to set up the Jetson TX2 for Team 303 use.
 
 ### Step 1: OS & JetPack Tool Installation ###
-Step 1 is flashing the Jetson with a L4T build, and installing all the JetPack tools. You will need an ubuntu 14.04 installation
-to function as the "host" computer. The elinux instructions say you can use a VM to do this, but I couldn't get it to work.
-Basically, just follow the instructions from elinux, it's not that hard. The most important thing is to not forget to install the JetPack tools.
+Step 1 is flashing the Jetson with a L4T build, and installing all the JetPack tools. Follow the instructions here: [Orbitty Youtube Installation Video](https://www.youtube.com/watch?v=9uMvXqhjxaQ) to install the drivers for the orbitty board. After that you will need to install the rest of the jetpack tools (start at Installing CUDA and Other Dependencies): [OpenCV Installation](https://github.com/NVIDIA-AI-IOT/jetson-trashformers/wiki/Jetson%E2%84%A2-Flashing-and-Setup-Guide-for-a-Connect-Tech-Carrier-Board). If you use a VM to function as the host computer, use VMWare Workstation Player (any version). VirtualBox did not work for me. 
 The Jetson and the host computer need to be connected to the same router for this to happen, and it's easy to accidentally quit the install application.
 You can test if this worked correctly by running a CUDA sample ('/home/NVIDIA/NVIDIA_CUDA-8.0_Samples/').
 
@@ -28,6 +26,7 @@ it is not included by default. Luckily for us, the kernel can be rebuilt on the 
 Kangalow (guy from jetsonhacks.com) has a beautiful guide (and video!) for rebuilding the kernel on the jetson itself. All that you need to do is
 follow the guide but instead of installing the ttyACM module, install the 'OV534 OV772x USB Camera Driver' as a module. Select it and hit 'm' to do this. 
 Make sure to save the kernel configuration, and build and install the kernel image. Reboot the Jetson afterward.
+Follow these links in order: https://www.jetsonhacks.com/2017/07/31/build-kernel-ttyacm-module-nvidia-jetson-tx2/ (build the kernel - make sure it's the correct L4T build - 27.1, 28.1, and 28.2 should all work) and install the module of the playstation eye (https://www.jetsonhacks.com/2016/09/29/sony-playstation-eye-nvidia-jetson-tx1/).  
 
 ### Step 3: Install More Tools ###
 Step 3 is installing NetworkTables, GStreamer, and Samba. Do the Samba installation first. Follow the elinux instructions for all of these.
@@ -52,7 +51,7 @@ As previously mentioned, you'll need [GStreamer for windows](https://gstreamer.f
 ### Step 5: Setup The Example Code ###
 You can compile the example code by going to the example you want's root directory (with the makefile) and running 'make'. Then, you can run it with './gstream_cv'.
 You may notice that the build fails when you try to run it. This is because it is looking for NetworkTables in the wrong spot.
-To fix this, edit the makefile and replace any instance of "3419" with "303". If it still doesn't build, you installed something wrong or not at all. Check that OpenCV and CUDA
+To fix this, edit the makefile and replace any instance of "3419" with "303". If it still doesn't build, you installed something wrong or not at all or try to reboot the jetson. Check that OpenCV and CUDA
 actually exist on the system. 
 
 Once you have it building and running, you can edit the parameters in main.cpp and vision.cpp as well as the header file vision.hpp to get it working the way you want.
